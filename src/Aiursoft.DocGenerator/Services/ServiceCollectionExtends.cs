@@ -3,6 +3,7 @@ using Aiursoft.DocGenerator.Attributes;
 using Aiursoft.DocGenerator.Middlewares;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Options;
 
 namespace Aiursoft.DocGenerator.Services;
 
@@ -32,6 +33,8 @@ public class APIDocGeneratorSettings
     };
 
     public List<object> GlobalApisPossibleResponses { get; set; } = new();
+
+    public Assembly? ApiProject { get; set; } = Assembly.GetEntryAssembly();
 }
 
 public static class ServiceCollectionExtends
@@ -42,7 +45,6 @@ public static class ServiceCollectionExtends
     {
         var defaultSettings = new APIDocGeneratorSettings();
         options?.Invoke(defaultSettings);
-        APIDocGeneratorMiddleware.ApplySettings(defaultSettings);
-        return app.UseMiddleware<APIDocGeneratorMiddleware>();
+        return app.UseMiddleware<DocGeneratorMiddleware>(Options.Create(defaultSettings));
     }
 }

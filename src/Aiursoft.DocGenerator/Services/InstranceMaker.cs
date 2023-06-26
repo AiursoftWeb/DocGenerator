@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Reflection;
 using Aiursoft.DocGenerator.Attributes;
+using Aiursoft.Scanner.Abstractions;
 using Newtonsoft.Json;
 
 namespace Aiursoft.DocGenerator.Services;
 
-public static class InstanceMaker
+public class InstanceMaker : ITransientDependency
 {
-    private static IList GetArrayWithInstanceInherits(Type itemType)
+    private IList GetArrayWithInstanceInherits(Type itemType)
     {
         var listType = typeof(List<>);
         var constructedListType = listType.MakeGenericType(itemType);
@@ -31,7 +32,7 @@ public static class InstanceMaker
         return instance;
     }
 
-    private static object? GenerateWithConstructor(Type type)
+    private object? GenerateWithConstructor(Type type)
     {
         // Has default constructor.
         if (type.GetConstructors().Length == 1 &&
@@ -70,7 +71,7 @@ public static class InstanceMaker
         return Assembly.GetAssembly(type)?.CreateInstance(type.FullName ?? string.Empty);
     }
 
-    public static object? Make(this Type type)
+    public object? Make(Type type)
     {
         if (type == typeof(string))
         {

@@ -85,7 +85,7 @@ public class MarkDownDocGenerator : ITransientDependency
         return routeTemplate;
     }
 
-    public string GenerateMarkDownForController(IGrouping<string, API> docController, string apiRoot)
+    public string GenerateMarkDownForController(IGrouping<string, Api> docController, string apiRoot)
     {
         var content = $"# {docController.Key.TrimController()}\r\n\r\n";
         content += "## Catalog\r\n\r\n";

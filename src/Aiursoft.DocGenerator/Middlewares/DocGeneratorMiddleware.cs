@@ -5,47 +5,43 @@ using Aiursoft.DocGenerator.Tools;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Aiursoft.DocGenerator.Middlewares;
 
-public class APIDocGeneratorMiddleware
+public class DocGeneratorMiddleware
 {
-    private static Func<MethodInfo, Type, bool>? _isAPIAction;
-    private static Func<MethodInfo, Type, bool>? _judgeAuthorized;
-    private static List<object> _globalPossibleResponse = new ();
-    private static DocFormat _format;
-    private static string? _docAddress;
     private readonly RequestDelegate _next;
+    private readonly APIDocGeneratorSettings _config;
+    private readonly ILogger<DocGeneratorMiddleware> _logger;
 
-    public APIDocGeneratorMiddleware(RequestDelegate next)
+    public DocGeneratorMiddleware(
+        RequestDelegate next,
+        ILoggerFactory loggerFactory, 
+        IOptions<APIDocGeneratorSettings> options)
     {
         _next = next;
-    }
-
-    public static void ApplySettings(APIDocGeneratorSettings settings)
-    {
-        _isAPIAction = settings.IsApiAction;
-        _judgeAuthorized = settings.RequiresAuthorized;
-        _globalPossibleResponse = settings.GlobalApisPossibleResponses;
-        _format = settings.Format;
-        _docAddress = settings.DocAddress.TrimStart('/').ToLower();
+        _config = options.Value;
+        _logger = loggerFactory.CreateLogger<DocGeneratorMiddleware>();
     }
 
     public async Task Invoke(HttpContext context)
     {
-        if (_isAPIAction == null || _judgeAuthorized == null)
+        if (_config.IsApiAction == null || _config.RequiresAuthorized == null || _config.GlobalApisPossibleResponses == null)
         {
             throw new ArgumentNullException();
         }
 
-        if (context.Request.Path.ToString().Trim().Trim('/').ToLower() != _docAddress)
+        if (context.Request.Path.ToString().Trim().Trim('/').ToLower() != _config.DocAddress.Trim().Trim('/').ToLower())
         {
             await _next.Invoke(context);
             return;
         }
 
-        switch (_format)
+        _logger.LogTrace("Requesting doc generator...");
+        switch (_config.Format)
         {
             case DocFormat.Json:
                 context.Response.ContentType = "application/json";
@@ -54,13 +50,12 @@ public class APIDocGeneratorMiddleware
                 context.Response.ContentType = "text/markdown";
                 break;
             default:
-                throw new InvalidDataException($"Invalid format: '{_format}'!");
+                throw new InvalidDataException($"Invalid format: '{_config.Format}'!");
         }
 
         context.Response.StatusCode = 200;
-        var actionsMatches = new List<API>();
-        var possibleControllers = Assembly
-            .GetEntryAssembly()
+        var actionsMatches = new List<Api>();
+        var possibleControllers = _config.ApiProject
             ?.GetTypes()
             .Where(type => typeof(ControllerBase).IsAssignableFrom(type))
             .ToList();
@@ -77,14 +72,14 @@ public class APIDocGeneratorMiddleware
                 .FirstOrDefault();
             foreach (var method in controller.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public))
             {
-                if (!IsAction(method) || !_isAPIAction(method, controller))
+                if (!IsAction(method) || !_config.IsApiAction(method, controller))
                 {
                     continue;
                 }
 
                 var args = GetArguments(method);
-                var possibleResponses = GetPossibleResponses(method);
-                var api = new API(
+                var possibleResponses = GetPossibleResponses(method, _config.GlobalApisPossibleResponses);
+                var api = new Api(
                     controllerName: controller.Name,
                     actionName: method.Name,
                     isPost: method.CustomAttributes.Any(t => t.AttributeType == typeof(HttpPostAttribute)),
@@ -94,7 +89,7 @@ public class APIDocGeneratorMiddleware
                         .Select(t => $"{controllerRoute}/{t}")
                         .ToList(),
                     arguments: args,
-                    authRequired: _judgeAuthorized(method, controller),
+                    authRequired: _config.RequiresAuthorized(method, controller),
                     possibleResponses: possibleResponses);
                 if (!api.Routes.Any())
                 {
@@ -106,11 +101,11 @@ public class APIDocGeneratorMiddleware
         }
 
         var generatedJsonDoc = JsonConvert.SerializeObject(actionsMatches);
-        if (_format == DocFormat.Json)
+        if (_config.Format == DocFormat.Json)
         {
             await context.Response.WriteAsync(generatedJsonDoc);
         }
-        else if (_format == DocFormat.Markdown)
+        else if (_config.Format == DocFormat.Markdown)
         {
             var generator = new MarkDownDocGenerator();
             var groupedControllers = actionsMatches.GroupBy(t => t.ControllerName);
@@ -126,15 +121,16 @@ public class APIDocGeneratorMiddleware
         }
     }
 
-    private string[] GetPossibleResponses(MethodInfo action)
+    private string[] GetPossibleResponses(MethodInfo action, List<object> globalApisPossibleResponses)
     {
+        var instanceMaker = new InstanceMaker();
         var possibleList = action.GetCustomAttributes(typeof(ProducesAttribute))
             .Select(t => (t as ProducesAttribute)!.Type!)
-            .Select(t => t.Make())
+            .Select(t => instanceMaker.Make(t))
             .Select(JsonConvert.SerializeObject)
             .ToList();
         possibleList.AddRange(
-            _globalPossibleResponse.Select(JsonConvert.SerializeObject));
+            globalApisPossibleResponses.Select(JsonConvert.SerializeObject));
         return possibleList.ToArray();
     }
 
@@ -150,7 +146,7 @@ public class APIDocGeneratorMiddleware
                     .GetProperties()
                     .Select(prop => new Argument(
                         name: GetArgumentName(prop, prop.Name),
-                        required: JudgeRequired(prop.PropertyType, prop.CustomAttributes),
+                        required: GetIsRequired(prop.PropertyType, prop.CustomAttributes),
                         type: ConvertTypeToArgumentType(prop.PropertyType)
                     )));
             }
@@ -158,7 +154,7 @@ public class APIDocGeneratorMiddleware
             {
                 args.Add(new Argument(
                     name: GetArgumentName(param, param.Name!),
-                    required: !param.HasDefaultValue && JudgeRequired(param.ParameterType, param.CustomAttributes),
+                    required: !param.HasDefaultValue && GetIsRequired(param.ParameterType, param.CustomAttributes),
                     type: ConvertTypeToArgumentType(param.ParameterType)
                 ));
             }
@@ -197,10 +193,7 @@ public class APIDocGeneratorMiddleware
     private bool IsAction(MethodInfo method)
     {
         return
-            !method.IsAbstract &&
-            !method.IsVirtual &&
-            !method.IsStatic &&
-            !method.IsConstructor &&
+            method is { IsAbstract: false, IsVirtual: false, IsStatic: false, IsConstructor: false } &&
             !method.IsDefined(typeof(NonActionAttribute)) &&
             !method.IsDefined(typeof(ObsoleteAttribute));
     }
@@ -222,7 +215,7 @@ public class APIDocGeneratorMiddleware
             ArgumentType.Unknown;
     }
 
-    private bool JudgeRequired(Type source, IEnumerable<CustomAttributeData> attributes)
+    private bool GetIsRequired(Type source, IEnumerable<CustomAttributeData> attributes)
     {
         if (attributes.Any(t => t.AttributeType == typeof(RequiredAttribute)))
         {
@@ -233,9 +226,9 @@ public class APIDocGeneratorMiddleware
     }
 }
 
-public class API
+public class Api
 {
-    public API(
+    public Api(
         string controllerName, 
         string actionName, 
         bool authRequired, 
