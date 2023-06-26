@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator", "src\Aiursoft.DocGenerator\Aiursoft.DocGenerator.csproj", "{5F39FA5E-969E-4E6A-AB66-08CD714DCA04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator.Abstract", "src\Aiursoft.DocGenerator.Abstract\Aiursoft.DocGenerator.Abstract.csproj", "{51A9E4F0-49DC-4200-BEC6-092F1D664D26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator.Abstractions", "src\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj", "{51A9E4F0-49DC-4200-BEC6-092F1D664D26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47776317-14DB-4B89-9232-AF9D4086FEA7}"
 EndProject

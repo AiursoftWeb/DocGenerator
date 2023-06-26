@@ -31,7 +31,7 @@
   </ItemGroup> 
 	
   <ItemGroup>
-    <ProjectReference Include="..\Aiursoft.DocGenerator.Abstract\Aiursoft.DocGenerator.Abstract.csproj" />
+    <ProjectReference Include="..\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj" />
   </ItemGroup> 
 
 </Project>
