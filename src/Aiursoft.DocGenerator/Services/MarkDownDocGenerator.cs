@@ -69,13 +69,8 @@ public class MarkDownDocGenerator : ITransientDependency
 
     private string GenerateRequestPathExample(string routeTemplate, List<Argument> args)
     {
-        foreach (var arg in args)
+        foreach (var arg in args.Where(arg => RouteContainsArg(routeTemplate, arg)))
         {
-            if (!RouteContainsArg(routeTemplate, arg))
-            {
-                continue;
-            }
-
             routeTemplate = routeTemplate.ToLower()
                 .Replace("{" + arg.Name.ToLower() + "}", "{" + GetExampleValue(arg) + "}");
             routeTemplate = routeTemplate.ToLower()
@@ -89,10 +84,7 @@ public class MarkDownDocGenerator : ITransientDependency
     {
         var content = $"# {docController.Key.TrimController()}\r\n\r\n";
         content += "## Catalog\r\n\r\n";
-        foreach (var docAction in docController)
-        {
-            content += $"* [{docAction.ActionName.SplitStringUpperCase()}](#{docAction.ActionName})\r\n";
-        }
+        content = docController.Aggregate(content, (current, docAction) => current + $"* [{docAction.ActionName.SplitStringUpperCase()}](#{docAction.ActionName})\r\n");
 
         content += "\r\n";
         foreach (var docAction in docController)
@@ -147,11 +139,7 @@ public class MarkDownDocGenerator : ITransientDependency
                 content += $"Request {(docAction.IsPost ? "form" : "arguments")}:\r\n\r\n";
                 content += "| Name | Required | Type |\r\n";
                 content += "|----------|:-------------:|:------:|\r\n";
-                foreach (var arg in docAction.Arguments)
-                {
-                    content +=
-                        $"|{arg.Name}|{(arg.Required ? "<b class='text-danger'>Required</b>" : "Not required")}|<b class='text-primary'>{ArgTypeConverter(arg.Type)}</b>|\r\n";
-                }
+                content = docAction.Arguments.Aggregate(content, (current, arg) => current + $"|{arg.Name}|{(arg.Required ? "<b class='text-danger'>Required</b>" : "Not required")}|<b class='text-primary'>{ArgTypeConverter(arg.Type)}</b>|\r\n");
 
                 content += "\r\n";
             }
@@ -159,8 +147,8 @@ public class MarkDownDocGenerator : ITransientDependency
             foreach (var possibleResponse in docAction.PossibleResponses)
             {
                 content += "Possible Response:\r\n";
-                var dybject = JsonConvert.DeserializeObject(possibleResponse);
-                var finalResult = JsonConvert.SerializeObject(dybject, Formatting.Indented);
+                var deserializeObject = JsonConvert.DeserializeObject(possibleResponse);
+                var finalResult = JsonConvert.SerializeObject(deserializeObject, Formatting.Indented);
                 content += "\r\n";
                 content += "```json\r\n";
                 content += finalResult;

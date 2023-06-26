@@ -14,13 +14,13 @@ namespace Aiursoft.DocGenerator.Middlewares;
 public class DocGeneratorMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly APIDocGeneratorSettings _config;
+    private readonly DocGeneratorSettings _config;
     private readonly ILogger<DocGeneratorMiddleware> _logger;
 
     public DocGeneratorMiddleware(
         RequestDelegate next,
         ILoggerFactory loggerFactory, 
-        IOptions<APIDocGeneratorSettings> options)
+        IOptions<DocGeneratorSettings> options)
     {
         _next = next;
         _config = options.Value;
@@ -41,17 +41,12 @@ public class DocGeneratorMiddleware
         }
 
         _logger.LogTrace("Requesting doc generator...");
-        switch (_config.Format)
+        context.Response.ContentType = _config.Format switch
         {
-            case DocFormat.Json:
-                context.Response.ContentType = "application/json";
-                break;
-            case DocFormat.Markdown:
-                context.Response.ContentType = "text/markdown";
-                break;
-            default:
-                throw new InvalidDataException($"Invalid format: '{_config.Format}'!");
-        }
+            DocFormat.Json => "application/json",
+            DocFormat.Markdown => "text/markdown",
+            _ => throw new InvalidDataException($"Invalid format: '{_config.Format}'!")
+        };
 
         context.Response.StatusCode = 200;
         var actionsMatches = new List<Api>();
@@ -109,19 +104,18 @@ public class DocGeneratorMiddleware
         {
             var generator = new MarkDownDocGenerator();
             var groupedControllers = actionsMatches.GroupBy(t => t.ControllerName);
-            var finalMarkDown = string.Empty;
-            foreach (var controllerDoc in groupedControllers)
-            {
-                finalMarkDown +=
-                    generator.GenerateMarkDownForController(controllerDoc,
-                        $"{context.Request.Scheme}://{context.Request.Host}") + "\r\n--------\r\n";
-            }
+            var finalMarkDown = groupedControllers.Aggregate(
+                string.Empty, 
+                (current, controllerDoc) => 
+                    current 
+                    + generator.GenerateMarkDownForController(controllerDoc, $"{context.Request.Scheme}://{context.Request.Host}") 
+                    + "\r\n--------\r\n");
 
             await context.Response.WriteAsync(finalMarkDown);
         }
     }
 
-    private string[] GetPossibleResponses(MethodInfo action, List<object> globalApisPossibleResponses)
+    private string[] GetPossibleResponses(MemberInfo action, IReadOnlyCollection<object> globalApisPossibleResponses)
     {
         var instanceMaker = new InstanceMaker();
         var possibleList = action.GetCustomAttributes(typeof(ProducesAttribute))
@@ -134,7 +128,7 @@ public class DocGeneratorMiddleware
         return possibleList.ToArray();
     }
 
-    private List<Argument> GetArguments(MethodInfo method)
+    private List<Argument> GetArguments(MethodBase method)
     {
         var args = new List<Argument>();
         foreach (var param in method.GetParameters())

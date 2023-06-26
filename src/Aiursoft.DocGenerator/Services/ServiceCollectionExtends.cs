@@ -13,7 +13,7 @@ public enum DocFormat
     Markdown
 }
 
-public class APIDocGeneratorSettings
+public class DocGeneratorSettings
 {
     public string DocAddress = "doc";
     public DocFormat Format = DocFormat.Json;
@@ -41,9 +41,9 @@ public static class ServiceCollectionExtends
 {
     public static IApplicationBuilder UseAiursoftDocGenerator(
         this IApplicationBuilder app,
-        Action<APIDocGeneratorSettings>? options = null)
+        Action<DocGeneratorSettings>? options = null)
     {
-        var defaultSettings = new APIDocGeneratorSettings();
+        var defaultSettings = new DocGeneratorSettings();
         options?.Invoke(defaultSettings);
         return app.UseMiddleware<DocGeneratorMiddleware>(Options.Create(defaultSettings));
     }
