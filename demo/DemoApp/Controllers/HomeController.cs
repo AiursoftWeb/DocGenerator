@@ -44,11 +44,13 @@ public class HomeController : ControllerBase
         return BadRequest(new { message = "This is not a valid Protocol response." });
     }
 
+    [Produces(typeof(AiurValue<int>))]
     public IActionResult GetANumber()
     {
         return this.Protocol(Code.ResultShown, "Got your value!", value: 123);
     }
 
+    [Produces(typeof(AiurCollection<int>))]
     public IActionResult QuerySomething([FromQuery] string question)
     {
         var items = Fibonacci()
@@ -79,6 +81,7 @@ public class HomeController : ControllerBase
     }
 
     [HttpPost]
+    [Produces(typeof(RegisterViewModel))]
     public IActionResult RegisterForm([FromForm] RegisterAddressModel model)
     {
         return this.Protocol(new RegisterViewModel
@@ -90,6 +93,7 @@ public class HomeController : ControllerBase
     }
 
     [HttpPost]
+    [Produces(typeof(RegisterViewModel))]
     public IActionResult RegisterJson([FromBody] RegisterAddressModel model)
     {
         return this.Protocol(new RegisterViewModel
