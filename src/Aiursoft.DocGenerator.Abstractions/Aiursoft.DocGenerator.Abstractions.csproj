@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!--Build and code-->
     <OutputType>Library</OutputType>
-    <Version>6.0.24</Version>
+    <Version>6.0.25</Version>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
     <!--Best practice-->
