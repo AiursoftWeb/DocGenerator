@@ -1,24 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <!--Build and code-->
-    <OutputType>Library</OutputType>
-    <Version>6.0.25</Version>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
-    <!--Best practice-->
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <!--Nuget-->
-    <Company>Aiursoft</Company>
-    <Product>DocGenerator</Product>
-    <Authors>anduin</Authors>
-    <Description>A tool for generating document for ASP.NET Core.</Description>
-    <PackageTags>cli nuget dotnet csproj dependencies</PackageTags>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</RepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</PackageProjectUrl>
-  </PropertyGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <Version>6.0.25</Version>
+        <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>Aiursoft.DocGenerator.Abstractions</AssemblyName>
+        <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
+        <IsTestProject>false</IsTestProject>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsPackable>true</IsPackable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Company>Aiursoft</Company>
+        <Product>DocGenerator</Product>
+        <Authors>anduin</Authors>
+        <Description>A tool for generating document for ASP.NET Core.</Description>
+        <PackageId>Aiursoft.DocGenerator.Abstractions</PackageId>
+        <PackageTags>cli nuget dotnet csproj dependencies</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</RepositoryUrl>
+    </PropertyGroup>
 </Project>
