@@ -3,6 +3,7 @@ using Aiursoft.AiurProtocol.Server;
 using Aiursoft.DocGenerator.Services;
 using Aiursoft.WebTools;
 using Aiursoft.AiurProtocol;
+using Aiursoft.WebTools.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 
 namespace DemoApiApp;
@@ -17,23 +18,17 @@ public class Program
     }
 }
 
-public class Startup
+public class Startup : IWebStartup
 {
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
-
-    public void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IConfiguration configuration, IWebHostEnvironment environment, IServiceCollection services)
     {
         services
             .AddControllers()
+            .AddApplicationPart(typeof(Startup).Assembly)
             .AddAiurProtocol();
     }
 
-    public void Configure(IApplicationBuilder app)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
     {
         app.UseForwardedHeaders(new ForwardedHeadersOptions
         {

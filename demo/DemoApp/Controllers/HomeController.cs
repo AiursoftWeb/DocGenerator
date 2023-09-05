@@ -10,23 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace DemoApiApp.Controllers;
 
 [ApiExceptionHandler(
-    PassthroughRemoteErrors = true, 
+    PassthroughRemoteErrors = true,
     PassthroughAiurServerException = true)]
 [ApiModelStateChecker]
 [GenerateDoc]
 [ExcludeFromCodeCoverage]
 public class HomeController : ControllerBase
 {
-    public IActionResult Redirect()
-    {
-        return this.Protocol(new AiurRelativePath("Home", nameof(QuerySomethingPaged), new QueryNumberAddressModel
-        {
-            PageNumber = 1,
-            PageSize = 3,
-            Question = "1"
-        }));
-    }
-
     public IActionResult Index()
     {
         return this.Protocol(Code.ResultShown, "Welcome to this API project!");
@@ -54,14 +44,15 @@ public class HomeController : ControllerBase
     public IActionResult QuerySomething([FromQuery] string question)
     {
         var items = Fibonacci()
+            .Take(1024 * 1024)
             .Where(i => i.ToString().EndsWith(question))
             .Take(10)
             .ToList();
         return this.Protocol(Code.ResultShown, "Got your value!", items);
     }
-    
+
     [Produces(typeof(AiurPagedCollection<int>))]
-    public async Task<IActionResult> QuerySomethingPaged([FromQuery]QueryNumberAddressModel model)
+    public async Task<IActionResult> QuerySomethingPaged([FromQuery] QueryNumberAddressModel model)
     {
         var database = Fibonacci()
             .Take(30)
