@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <Version>6.0.26</Version>
+        <Version>7.0.0</Version>
         <TargetFramework>net7.0</TargetFramework>
         <AssemblyName>Aiursoft.DocGenerator</AssemblyName>
         <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
