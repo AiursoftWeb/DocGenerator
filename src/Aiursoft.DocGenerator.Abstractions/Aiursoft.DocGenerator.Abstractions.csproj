@@ -1,24 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Library</OutputType>
-        <Version>7.0.0</Version>
-        <TargetFramework>net7.0</TargetFramework>
-        <AssemblyName>Aiursoft.DocGenerator.Abstractions</AssemblyName>
-        <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
-        <IsTestProject>false</IsTestProject>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <IsPackable>true</IsPackable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <Company>Aiursoft</Company>
-        <Product>DocGenerator</Product>
-        <Authors>anduin</Authors>
-        <Description>A tool for generating document for ASP.NET Core.</Description>
-        <PackageId>Aiursoft.DocGenerator.Abstractions</PackageId>
-        <PackageTags>cli nuget dotnet csproj dependencies</PackageTags>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</PackageProjectUrl>
-        <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</RepositoryUrl>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <Version>7.0.1</Version>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>Aiursoft.DocGenerator.Abstractions</AssemblyName>
+    <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
+    <IsTestProject>false</IsTestProject>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Company>Aiursoft</Company>
+    <Product>DocGenerator</Product>
+    <Authors>anduin</Authors>
+    <Description>A tool for generating document for ASP.NET Core.</Description>
+    <PackageId>Aiursoft.DocGenerator.Abstractions</PackageId>
+    <PackageTags>cli nuget dotnet csproj dependencies</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</RepositoryUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\Readme.md" Pack="true" PackagePath="." />
+  </ItemGroup>
 </Project>
