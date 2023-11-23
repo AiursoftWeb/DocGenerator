@@ -69,7 +69,6 @@ public class Startup : IWebStartup
                 Message = "Your input contains several errors!"
             });
         });
-        app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
-
+        app.MapDefaultControllerRoute();
     }
 }
