@@ -4,7 +4,7 @@
 [![Pipeline stat](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/badges/master/pipeline.svg)](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/-/pipelines)
 [![NuGet version (Aiursoft.DocGenerator)](https://img.shields.io/nuget/v/Aiursoft.DocGenerator.svg)](https://www.nuget.org/packages/Aiursoft.DocGenerator/)
-[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/aiursoft/docgenerator.svg)](https://gitlab.aiursoft.cn/aiursoft/docgenerator/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/docgenerator.svg)](https://gitlab.aiursoft.cn/aiursoft/docgenerator/-/commits/master?ref_type=heads)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fwiki.aiursoft.com%2F%3Fshow%3Ddirect)](https://wiki.aiursoft.com)
 
 A basic API document generator for ASP.NET Core applications. Open source, offline and free.
