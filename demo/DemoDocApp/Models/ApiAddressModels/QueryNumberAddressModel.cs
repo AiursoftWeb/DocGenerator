@@ -1,6 +1,6 @@
 ﻿using Aiursoft.AiurProtocol;
 
-namespace DemoApiApp.Sdk.Models.ApiAddressModels;
+namespace DemoDocApp.Sdk.Models.ApiAddressModels;
 
 public class QueryNumberAddressModel : Pager
 {

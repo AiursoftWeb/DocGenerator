@@ -3,7 +3,7 @@ using Aiursoft.WebTools;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DemoApiApp.Tests;
+namespace DemoDocApp.Tests;
 
 [TestClass]
 public class IntegrationTests

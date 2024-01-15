@@ -3,27 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator", "src\Aiursoft.DocGenerator\Aiursoft.DocGenerator.csproj", "{5F39FA5E-969E-4E6A-AB66-08CD714DCA04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiursoft.DocGenerator", "src\Aiursoft.DocGenerator\Aiursoft.DocGenerator.csproj", "{5F39FA5E-969E-4E6A-AB66-08CD714DCA04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator.Abstractions", "src\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj", "{51A9E4F0-49DC-4200-BEC6-092F1D664D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiursoft.DocGenerator.Abstractions", "src\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj", "{51A9E4F0-49DC-4200-BEC6-092F1D664D26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47776317-14DB-4B89-9232-AF9D4086FEA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{44E5C37E-D29E-451B-A5AF-38E76A7732AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApiApp", "demo\DemoApp\DemoApiApp.csproj", "{6F5787C5-3438-4433-8775-AFD63E91BD5D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{95970CDE-4B71-4FC9-A457-F47B0ADB604A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aiursoft.DocGenerator.Tests", "tests\Aiursoft.DocGenerator.Tests\Aiursoft.DocGenerator.Tests.csproj", "{25775DC5-A346-4809-9963-EF3E253EF7DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiursoft.DocGenerator.Tests", "tests\Aiursoft.DocGenerator.Tests\Aiursoft.DocGenerator.Tests.csproj", "{25775DC5-A346-4809-9963-EF3E253EF7DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoDocApp", "demo\DemoDocApp\DemoDocApp.csproj", "{C66CEE4A-6A36-40D5-8BB6-85734A861400}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F39FA5E-969E-4E6A-AB66-08CD714DCA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,19 +31,22 @@ Global
 		{51A9E4F0-49DC-4200-BEC6-092F1D664D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51A9E4F0-49DC-4200-BEC6-092F1D664D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51A9E4F0-49DC-4200-BEC6-092F1D664D26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F5787C5-3438-4433-8775-AFD63E91BD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F5787C5-3438-4433-8775-AFD63E91BD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F5787C5-3438-4433-8775-AFD63E91BD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F5787C5-3438-4433-8775-AFD63E91BD5D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{25775DC5-A346-4809-9963-EF3E253EF7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25775DC5-A346-4809-9963-EF3E253EF7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25775DC5-A346-4809-9963-EF3E253EF7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25775DC5-A346-4809-9963-EF3E253EF7DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C66CEE4A-6A36-40D5-8BB6-85734A861400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C66CEE4A-6A36-40D5-8BB6-85734A861400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C66CEE4A-6A36-40D5-8BB6-85734A861400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C66CEE4A-6A36-40D5-8BB6-85734A861400}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5F39FA5E-969E-4E6A-AB66-08CD714DCA04} = {47776317-14DB-4B89-9232-AF9D4086FEA7}
 		{51A9E4F0-49DC-4200-BEC6-092F1D664D26} = {47776317-14DB-4B89-9232-AF9D4086FEA7}
-		{6F5787C5-3438-4433-8775-AFD63E91BD5D} = {44E5C37E-D29E-451B-A5AF-38E76A7732AF}
 		{25775DC5-A346-4809-9963-EF3E253EF7DF} = {95970CDE-4B71-4FC9-A457-F47B0ADB604A}
+		{C66CEE4A-6A36-40D5-8BB6-85734A861400} = {44E5C37E-D29E-451B-A5AF-38E76A7732AF}
 	EndGlobalSection
 EndGlobal

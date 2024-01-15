@@ -2,12 +2,12 @@
 using Aiursoft.AiurProtocol;
 using Aiursoft.AiurProtocol.Server;
 using Aiursoft.DocGenerator.Attributes;
-using DemoApiApp.Sdk.Models.ApiAddressModels;
-using DemoApiApp.Sdk.Models.ApiViewModels;
+using DemoDocApp.Sdk.Models.ApiAddressModels;
+using DemoDocApp.Sdk.Models.ApiViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DemoApiApp.Controllers;
+namespace DemoDocApp.Controllers;
 
 [ApiExceptionHandler(
     PassthroughRemoteErrors = true,

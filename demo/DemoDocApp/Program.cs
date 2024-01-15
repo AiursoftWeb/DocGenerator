@@ -6,7 +6,7 @@ using Aiursoft.AiurProtocol;
 using Aiursoft.WebTools.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 
-namespace DemoApiApp;
+namespace DemoDocApp;
 
 public class Program
 {
