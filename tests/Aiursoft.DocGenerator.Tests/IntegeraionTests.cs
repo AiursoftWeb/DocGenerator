@@ -1,9 +1,10 @@
 ﻿using Aiursoft.CSTools.Tools;
 using Aiursoft.WebTools;
+using DemoDocApp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DemoDocApp.Tests;
+namespace Aiursoft.DocGenerator.Tests;
 
 [TestClass]
 public class IntegrationTests

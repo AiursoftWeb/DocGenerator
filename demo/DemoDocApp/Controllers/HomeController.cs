@@ -2,8 +2,8 @@
 using Aiursoft.AiurProtocol;
 using Aiursoft.AiurProtocol.Server;
 using Aiursoft.DocGenerator.Attributes;
-using DemoDocApp.Sdk.Models.ApiAddressModels;
-using DemoDocApp.Sdk.Models.ApiViewModels;
+using DemoDocApp.Models.ApiAddressModels;
+using DemoDocApp.Models.ApiViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

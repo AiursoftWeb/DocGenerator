@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace DemoDocApp.Sdk.Models.ApiAddressModels;
+namespace DemoDocApp.Models.ApiAddressModels;
 
 public class RegisterAddressModel
 {

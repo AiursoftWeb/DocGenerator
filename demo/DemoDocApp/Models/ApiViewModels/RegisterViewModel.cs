@@ -1,6 +1,6 @@
 ﻿using Aiursoft.AiurProtocol;
 
-namespace DemoDocApp.Sdk.Models.ApiViewModels;
+namespace DemoDocApp.Models.ApiViewModels;
 
 public class RegisterViewModel : AiurResponse
 {
