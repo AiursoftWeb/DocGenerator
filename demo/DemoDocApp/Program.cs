@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using Aiursoft.AiurProtocol.Server;
 using Aiursoft.DocGenerator.Services;
 using Aiursoft.WebTools;
-using Aiursoft.AiurProtocol;
-using Aiursoft.WebTools.Models;
+using Aiursoft.AiurProtocol.Models;
+using Aiursoft.WebTools.Abstractions.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 
 namespace DemoDocApp;
