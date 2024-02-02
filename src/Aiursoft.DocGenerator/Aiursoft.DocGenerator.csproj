@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <Version>7.0.2</Version>
+    <Version>7.0.3</Version>
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>Aiursoft.DocGenerator</AssemblyName>
     <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
@@ -28,7 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Aiursoft.Scanner.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Aiursoft.Scanner.Abstractions" Version="7.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj" />
