@@ -247,7 +247,4 @@ public class SampleBook
     public SampleBook[] ReferencedBy = Array.Empty<SampleBook>();
 }
 
-public abstract class Teacher
-{
-    
-}
+public abstract class Teacher;

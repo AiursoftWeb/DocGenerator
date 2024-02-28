@@ -1,5 +1,3 @@
 ﻿namespace Aiursoft.DocGenerator.Attributes;
 
-public class GenerateDoc : Attribute
-{
-}
+public class GenerateDoc : Attribute;
