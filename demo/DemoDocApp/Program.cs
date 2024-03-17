@@ -13,7 +13,7 @@ public class Program
     [ExcludeFromCodeCoverage]
     public static async Task Main(string[] args)
     {
-        var app = Extends.App<Startup>(args);
+        var app = await Extends.AppAsync<Startup>(args);
         await app.RunAsync();
     }
 }

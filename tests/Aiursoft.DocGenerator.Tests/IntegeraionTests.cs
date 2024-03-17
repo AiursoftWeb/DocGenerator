@@ -22,7 +22,7 @@ public class IntegrationTests
     [TestInitialize]
     public async Task TestInitialize()
     {
-        _server = Extends.App<Startup>(Array.Empty<string>(), port: _port);
+        _server = await Extends.AppAsync<Startup>(Array.Empty<string>(), port: _port);
         await _server.StartAsync();
     }
 
