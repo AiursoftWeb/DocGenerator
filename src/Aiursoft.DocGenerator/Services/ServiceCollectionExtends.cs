@@ -10,7 +10,8 @@ namespace Aiursoft.DocGenerator.Services;
 public enum DocFormat
 {
     Json,
-    Markdown
+    Markdown,
+    Html
 }
 
 public class DocGeneratorSettings

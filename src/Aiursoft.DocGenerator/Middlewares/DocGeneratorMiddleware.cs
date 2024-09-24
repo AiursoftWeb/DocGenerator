@@ -2,6 +2,7 @@
 using System.Reflection;
 using Aiursoft.DocGenerator.Services;
 using Aiursoft.DocGenerator.Tools;
+using Markdig;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -45,6 +46,7 @@ public class DocGeneratorMiddleware
         {
             DocFormat.Json => "application/json",
             DocFormat.Markdown => "text/markdown",
+            DocFormat.Html => "text/html",
             _ => throw new InvalidDataException($"Invalid format: '{_config.Format}'!")
         };
 
@@ -112,6 +114,22 @@ public class DocGeneratorMiddleware
                     + "\r\n--------\r\n");
 
             await context.Response.WriteAsync(finalMarkDown);
+        }
+        else if (_config.Format == DocFormat.Html)
+        {
+            var generator = new MarkDownDocGenerator();
+            var groupedControllers = actionsMatches.GroupBy(t => t.ControllerName);
+            var finalMarkDown = groupedControllers.Aggregate(
+                string.Empty, 
+                (current, controllerDoc) => 
+                    current 
+                    + generator.GenerateMarkDownForController(controllerDoc, $"{context.Request.Scheme}://{context.Request.Host}") 
+                    + "\r\n--------\r\n");
+            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+            var html = Markdown.ToHtml(finalMarkDown, pipeline);
+            var header = "<!DOCTYPE html><html><head><title>API Document</title></head><body>";
+            var footer = "</body></html>";
+            await context.Response.WriteAsync(header + html + footer);
         }
     }
 

@@ -69,6 +69,23 @@ public class Startup : IWebStartup
                 Message = "Your input contains several errors!"
             });
         });
+        
+        app.UseAiursoftDocGenerator(options: option =>
+        {
+            option.DocAddress = "/my-doc-html";
+            option.Format = DocFormat.Html;
+            option.ApiProject = typeof(Startup).Assembly;
+            option.GlobalApisPossibleResponses.Add(new AiurResponse
+            {
+                Code = Code.WrongKey,
+                Message = "Some error."
+            });
+            option.GlobalApisPossibleResponses.Add(new AiurCollection<string>(new List<string> { "Some item is invalid!" })
+            {
+                Code = Code.InvalidInput,
+                Message = "Your input contains several errors!"
+            });
+        });
         app.MapDefaultControllerRoute();
     }
 }
