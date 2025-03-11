@@ -20,10 +20,6 @@ A basic API document generator for ASP.NET Core applications. Open source, offli
 
 [Open the example](https://wiki.aiursoft.com/Kahla/Devices.md)
 
-## Supports
-
-* ASP.NET Core 6.0
-
 ## How to use
 
 First, install `Aiursoft.DocGenerator` to your ASP.NET Core project from nuget.org:
