@@ -5,13 +5,8 @@
 [![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/-/pipelines)
 [![NuGet version (Aiursoft.DocGenerator)](https://img.shields.io/nuget/v/Aiursoft.DocGenerator.svg)](https://www.nuget.org/packages/Aiursoft.DocGenerator/)
 [![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/docgenerator.svg)](https://gitlab.aiursoft.cn/aiursoft/docgenerator/-/commits/master?ref_type=heads)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fwiki.aiursoft.com%2F%3Fshow%3Ddirect)](https://wiki.aiursoft.com)
 
 A basic API document generator for ASP.NET Core applications. Open source, offline and free.
-
-<div align=center>
-    <img src="./demo.png">
-</div>
 
 ## Features
 
@@ -20,7 +15,7 @@ A basic API document generator for ASP.NET Core applications. Open source, offli
 
 [Open the example](https://wiki.aiursoft.com/Kahla/Devices.md)
 
-## How to use
+## How to install
 
 First, install `Aiursoft.DocGenerator` to your ASP.NET Core project from nuget.org:
 
