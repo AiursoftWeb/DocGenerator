@@ -14,6 +14,6 @@
     <ProjectReference Include="..\..\src\Aiursoft.DocGenerator\Aiursoft.DocGenerator.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Aiursoft.WebTools" Version="9.0.2" />
+    <PackageReference Include="Aiursoft.WebTools" Version="9.0.3" />
   </ItemGroup>
 </Project>
