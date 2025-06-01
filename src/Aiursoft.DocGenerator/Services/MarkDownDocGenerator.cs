@@ -34,9 +34,6 @@ public class MarkDownDocGenerator : ITransientDependency
             ArgumentType.Boolean => "false",
             ArgumentType.Datetime => "01/01/2018",
             ArgumentType.Number => "0",
-            ArgumentType.Text => $"your{arg.Name}",
-            ArgumentType.Collection => $"your{arg.Name}",
-            ArgumentType.Unknown => $"your{arg.Name}",
             _ => $"your{arg.Name}"
         };
     }
