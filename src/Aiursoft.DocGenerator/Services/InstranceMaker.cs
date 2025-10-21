@@ -36,7 +36,7 @@ public class InstanceMaker : ITransientDependency
     {
         // Has default constructor.
         if (type.GetConstructors().Length == 1 &&
-            !type.GetConstructors()[0].GetParameters().Any() &&
+            type.GetConstructors()[0].GetParameters().Length == 0 &&
             !type.IsAbstract)
         {
             return Assembly.GetAssembly(type)?.CreateInstance(type.FullName ?? string.Empty);

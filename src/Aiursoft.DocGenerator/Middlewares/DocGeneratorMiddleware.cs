@@ -88,7 +88,7 @@ public class DocGeneratorMiddleware
                     arguments: args,
                     authRequired: _config.RequiresAuthorized(method, controller),
                     possibleResponses: possibleResponses);
-                if (!api.Routes.Any())
+                if (api.Routes.Count == 0)
                 {
                     api.Routes.Add($"{api.ControllerName.TrimController()}/{api.ActionName}");
                 }

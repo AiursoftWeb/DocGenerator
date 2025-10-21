@@ -190,9 +190,9 @@ public class InstanceMakerTests
 
         // Assert
         Assert.IsTrue((result as Major)?.RequiresCollege);
-        Assert.IsTrue((result as Major)?.TextBooks.Any());
-        Assert.IsTrue((result as Major)?.TestBooks.Any());
-        Assert.IsGreaterThan(1, (result as Major)?.TestBooks.First().Author.Length);
+        Assert.AreNotEqual(0, (result as Major)?.TextBooks.Count);
+        Assert.AreNotEqual(0, (result as Major)?.TestBooks.Length);
+        Assert.IsGreaterThan(1, (result as Major)?.TestBooks.First().Author.Length ?? 0);
 
     }
 }
