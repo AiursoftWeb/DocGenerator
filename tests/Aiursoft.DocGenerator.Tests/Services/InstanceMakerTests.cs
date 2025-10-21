@@ -1,6 +1,5 @@
 ﻿using Aiursoft.DocGenerator.Attributes;
 using Aiursoft.DocGenerator.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Aiursoft.DocGenerator.Tests.Services;
 
