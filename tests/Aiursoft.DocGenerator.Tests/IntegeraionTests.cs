@@ -2,7 +2,6 @@
 using Aiursoft.WebTools;
 using DemoDocApp;
 using Microsoft.Extensions.Hosting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Aiursoft.DocGenerator.Tests;
 
