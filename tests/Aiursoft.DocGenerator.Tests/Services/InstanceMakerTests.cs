@@ -1,6 +1,8 @@
 ﻿using Aiursoft.DocGenerator.Attributes;
 using Aiursoft.DocGenerator.Services;
 
+[assembly: DoNotParallelize]
+
 namespace Aiursoft.DocGenerator.Tests.Services;
 
 [TestClass]
