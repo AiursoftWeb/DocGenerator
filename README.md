@@ -1,10 +1,10 @@
 # ASP.NET Core API Document Generator
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.cn/aiursoft/infrastDocGeneratorructures/-/blob/master/LICENSE)
-[![Pipeline stat](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/badges/master/pipeline.svg)](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/-/pipelines)
-[![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/DocGenerator/-/pipelines)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.com/aiursoft/infrastDocGeneratorructures/-/blob/master/LICENSE)
+[![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/DocGenerator/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/DocGenerator/-/pipelines)
+[![Test Coverage](https://gitlab.aiursoft.com/aiursoft/DocGenerator/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/DocGenerator/-/pipelines)
 [![NuGet version (Aiursoft.DocGenerator)](https://img.shields.io/nuget/v/Aiursoft.DocGenerator.svg)](https://www.nuget.org/packages/Aiursoft.DocGenerator/)
-[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/docgenerator.svg)](https://gitlab.aiursoft.cn/aiursoft/docgenerator/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.com/aiursoft/docgenerator.svg)](https://gitlab.aiursoft.com/aiursoft/docgenerator/-/commits/master?ref_type=heads)
 
 A basic API document generator for ASP.NET Core applications. Open source, offline and free.
 

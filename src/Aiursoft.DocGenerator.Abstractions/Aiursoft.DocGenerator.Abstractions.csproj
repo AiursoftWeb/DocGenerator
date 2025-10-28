@@ -17,9 +17,9 @@
     <PackageId>Aiursoft.DocGenerator.Abstractions</PackageId>
     <PackageTags>cli nuget dotnet csproj dependencies</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</PackageProjectUrl>
+    <PackageProjectUrl>https://gitlab.aiursoft.com/aiursoft/docgenerator</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://gitlab.aiursoft.cn/aiursoft/docgenerator</RepositoryUrl>
+    <RepositoryUrl>https://gitlab.aiursoft.com/aiursoft/docgenerator</RepositoryUrl>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
