@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <Version>9.0.8</Version>
-    <TargetFramework>net9.0</TargetFramework>
+    <Version>10.0.1</Version>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>Aiursoft.DocGenerator</AssemblyName>
     <RootNamespace>Aiursoft.DocGenerator</RootNamespace>
     <IsTestProject>false</IsTestProject>
@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.43.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="Aiursoft.Scanner.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Aiursoft.Scanner.Abstractions" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aiursoft.DocGenerator.Abstractions\Aiursoft.DocGenerator.Abstractions.csproj" />
