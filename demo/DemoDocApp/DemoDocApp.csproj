@@ -10,10 +10,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aiursoft.AiurProtocol.Server" Version="10.0.7" />
+    <PackageReference Include="Aiursoft.AiurProtocol.Server" Version="10.0.8" />
     <ProjectReference Include="..\..\src\Aiursoft.DocGenerator\Aiursoft.DocGenerator.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Aiursoft.WebTools" Version="10.0.6" />
+    <PackageReference Include="Aiursoft.WebTools" Version="10.0.7" />
   </ItemGroup>
 </Project>
