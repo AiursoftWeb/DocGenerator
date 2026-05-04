@@ -11,6 +11,7 @@ public class IntegrationTests
     private readonly int _port;
     private readonly string _endpointUrl;
     private IHost? _server;
+    private static readonly HttpClient Client = new();
 
     public IntegrationTests()
     {
@@ -39,8 +40,7 @@ public class IntegrationTests
     public async Task TestJsonDoc()
     {
         var request = new HttpRequestMessage(HttpMethod.Get, _endpointUrl + "/my-doc-json");
-        var client = new HttpClient();
-        var result = await client.SendAsync(request);
+        var result = await Client.SendAsync(request);
         await result.Content.ReadAsStringAsync();
         Assert.AreEqual(200, (int)result.StatusCode);
     }
@@ -49,8 +49,7 @@ public class IntegrationTests
     public async Task TestMarkdownDoc()
     {
         var request = new HttpRequestMessage(HttpMethod.Get, _endpointUrl + "/my-doc-markdown");
-        var client = new HttpClient();
-        var result = await client.SendAsync(request);
+        var result = await Client.SendAsync(request);
         await result.Content.ReadAsStringAsync();
         Assert.AreEqual(200, (int)result.StatusCode);
     }
