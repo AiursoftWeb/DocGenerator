@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiursoft.DocGenerator.Abstr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47776317-14DB-4B89-9232-AF9D4086FEA7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{44E5C37E-D29E-451B-A5AF-38E76A7732AF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demos", "demos", "{44E5C37E-D29E-451B-A5AF-38E76A7732AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{95970CDE-4B71-4FC9-A457-F47B0ADB604A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aiursoft.DocGenerator.Tests", "tests\Aiursoft.DocGenerator.Tests\Aiursoft.DocGenerator.Tests.csproj", "{25775DC5-A346-4809-9963-EF3E253EF7DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoDocApp", "demo\DemoDocApp\DemoDocApp.csproj", "{C66CEE4A-6A36-40D5-8BB6-85734A861400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoDocApp", "demos\DemoDocApp\DemoDocApp.csproj", "{C66CEE4A-6A36-40D5-8BB6-85734A861400}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
