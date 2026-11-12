@@ -35,7 +35,7 @@ public class DocGeneratorMiddleware
             throw new ArgumentNullException();
         }
 
-        if (context.Request.Path.ToString().Trim().Trim('/').ToLower() != _config.DocAddress.Trim().Trim('/').ToLower())
+        if (!string.Equals(context.Request.Path.ToString().Trim().Trim('/'), _config.DocAddress.Trim().Trim('/'), StringComparison.OrdinalIgnoreCase))
         {
             await _next.Invoke(context);
             return;

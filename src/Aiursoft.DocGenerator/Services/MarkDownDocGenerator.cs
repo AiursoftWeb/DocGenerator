@@ -60,18 +60,18 @@ public class MarkDownDocGenerator : ITransientDependency
     private bool RouteContainsArg(string routeTemplate, Argument arg)
     {
         return
-            routeTemplate.ToLower().Contains("{" + arg.Name.ToLower() + "}") ||
-            routeTemplate.ToLower().Contains("{**" + arg.Name.ToLower() + "}");
+            routeTemplate.ToLowerInvariant().Contains("{" + arg.Name.ToLowerInvariant() + "}") ||
+            routeTemplate.ToLowerInvariant().Contains("{**" + arg.Name.ToLowerInvariant() + "}");
     }
 
     private string GenerateRequestPathExample(string routeTemplate, List<Argument> args)
     {
         foreach (var arg in args.Where(arg => RouteContainsArg(routeTemplate, arg)))
         {
-            routeTemplate = routeTemplate.ToLower()
-                .Replace("{" + arg.Name.ToLower() + "}", "{" + GetExampleValue(arg) + "}");
-            routeTemplate = routeTemplate.ToLower()
-                .Replace("{**" + arg.Name.ToLower() + "}", "{" + GetExampleValue(arg) + "}");
+            routeTemplate = routeTemplate.ToLowerInvariant()
+                .Replace("{" + arg.Name.ToLowerInvariant() + "}", "{" + GetExampleValue(arg) + "}");
+            routeTemplate = routeTemplate.ToLowerInvariant()
+                .Replace("{**" + arg.Name.ToLowerInvariant() + "}", "{" + GetExampleValue(arg) + "}");
         }
 
         return routeTemplate;
