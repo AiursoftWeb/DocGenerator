@@ -26,7 +26,7 @@ public static class StringExtends
             }
             else
             {
-                b.Append(word.ToLower() + " ");
+                b.Append(word.ToLowerInvariant() + " ");
             }
         }
 
