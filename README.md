@@ -1,4 +1,6 @@
-# ASP.NET Core API Document Generator
+# Aiursoft DocGenerator
+
+<a name="aspnet-core-api-document-generator"></a>
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/docgenerator/blob/master/LICENSE)
 [![Pipeline stat](https://badge-proxy.aiursoft.com/aiursoft/DocGenerator/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/DocGenerator/-/pipelines)
@@ -9,20 +11,56 @@
 
 A basic API document generator for ASP.NET Core applications. Open source, offline and free.
 
-## Features
+## Overview
+
+### What is DocGenerator?
+
+<a name="features"></a>
 
 * Generate Markdown
 * Generate Json
 
 [Open the example](https://wiki.aiursoft.com/Kahla/Devices.md)
 
-## How to install
+## Installation
+
+Add the package to your .NET project:
+
+<a name="how-to-install"></a>
 
 First, install `Aiursoft.DocGenerator` to your ASP.NET Core project from nuget.org:
 
 ```bash
 dotnet add package Aiursoft.DocGenerator
 ```
+
+Requires .NET 10 or later.
+
+## Usage
+
+Use this complete ASP.NET Core `Program.cs` after installing the package, then browse `/doc`:
+
+```csharp
+using Aiursoft.DocGenerator.Attributes;
+using Aiursoft.DocGenerator.Services;
+using Microsoft.AspNetCore.Mvc;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+var app = builder.Build();
+app.UseAiursoftDocGenerator();
+app.MapControllers();
+app.Run();
+
+[GenerateDoc]
+public class ExampleController : ControllerBase
+{
+    [HttpGet("/hello")]
+    public IActionResult Hello() => Ok("Hello");
+}
+```
+
+### Middleware integration
 
 Simply add this line in your `Startup.cs`:
 
@@ -34,7 +72,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     // ...
     // your middlewares
     // ...
-    
+
     app.UseAiursoftDocGenerator(); // <- Add this.
 }
 ```
@@ -62,9 +100,13 @@ That's all! Happy coding!
 
 Continue? Try runing the example project! Or continue reading.
 
-## Customization and API
+## Configuration
 
-### Change document output address
+<a name="customization-and-api"></a>
+
+**Change document output address**
+
+<a name="change-document-output-address"></a>
 
 ```csharp
 app.UseAiursoftDocGenerator(options =>
@@ -74,7 +116,9 @@ app.UseAiursoftDocGenerator(options =>
 });
 ```
 
-### Change document output format
+**Change document output format**
+
+<a name="change-document-output-format"></a>
 
 ```csharp
 app.UseAiursoftDocGenerator(options =>
@@ -84,17 +128,21 @@ app.UseAiursoftDocGenerator(options =>
 });
 ```
 
-### Set global possible responses
+**Set global possible responses**
+
+<a name="set-global-possible-responses"></a>
 
 ```csharp
 app.UseAiursoftDocGenerator(options =>
 {
     // Default global possible response is an empty list.
-    options.GlobalPossibleResponse.Add(new { code = 0, message = "success." });
+    options.GlobalApisPossibleResponses.Add(new { code = 0, message = "success." });
 });
 ```
 
-### Set possible response for one API
+**Set possible response for one API**
+
+<a name="set-possible-response-for-one-api"></a>
 
 When you can ensure the possible response for one API, add this line to your action:
 
@@ -107,14 +155,16 @@ public IActionResult HasOutput()
 }
 ```
 
-### Document generation filter
+**Document generation filter**
+
+<a name="document-generation-filter"></a>
 
 By default, only controllers and actions with `[GenerateDoc]` attributes will be generated.
 
 To mark a controller or action which generates document, add attribute `[GenerateDoc]` like this:
 
 ```csharp
-using Aiursoft.DocGenerator.Attribute;
+using Aiursoft.DocGenerator.Attributes;
 
 [GenerateDoc] // Add this, the entire controller will generate document.
 public class HomeController : Controller
@@ -132,15 +182,17 @@ You can change that logic to your own filter:
 ```csharp
 app.UseAiursoftDocGenerator(options =>
 {
-    options.IsAPIAction = (action, controller) =>
+    options.IsApiAction = (action, controller) =>
     {
         // Your own logic. Return bool.
         return action.CustomAttributes.Any(t => t.AttributeType == typeof(GenerateDoc));
     };
-}
+});
 ```
 
-### Authorized action detector
+**Authorized action detector**
+
+<a name="authorized-action-detector"></a>
 
 If your API is authorized required, we can detect that in the document. And you can customzie the logic:
 
@@ -149,20 +201,44 @@ using Microsoft.AspNetCore.Authorization;
 
 app.UseAiursoftDocGenerator(options =>
 {
-    options.JudgeAuthorized = (action, controller) =>
+    options.RequiresAuthorized = (action, controller) =>
     {
         // Your own logic here. Return bool.
         return
             action.CustomAttributes.Any(t => t.AttributeType == typeof(AuthorizeAttribute)) ||
             controller.CustomAttributes.Any(t => t.AttributeType == typeof(AuthorizeAttribute));
     };
-}
+});
 ```
+
+**Defaults**
+
+`DocGeneratorSettings` uses the `doc` address (served as `/doc`), JSON format and an empty `GlobalApisPossibleResponses` list. By default it selects actions or controllers marked with `GenerateDoc`, checks `AuthorizeAttribute` for authorization metadata, and uses the entry assembly for `ApiProject`. Set these delegates and values in the middleware options; no separate configuration file is required.
+
+## Development
+
+Install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+From the repository root, restore, build and test:
+
+```bash
+dotnet restore Aiursoft.DocGenerator.sln
+dotnet build Aiursoft.DocGenerator.sln --no-restore
+dotnet test Aiursoft.DocGenerator.sln --no-restore
+```
+
+Run `./lint.sh` for the existing static checks.
 
 ## How to contribute
 
+<a name="how-to-contribute"></a>
+
 There are many ways to contribute to the project: logging bugs, submitting pull requests, reporting issues, and creating suggestions.
 
-Even if you with push rights on the repository, you should create a personal fork and create feature branches there when you need them. This keeps the main repository clean and your workflow cruft out of sight.
+Even if you have push rights on the repository, you should create a personal fork and create feature branches there when you need them. This keeps the main repository clean and your workflow cruft out of sight.
 
 We're also interested in your feedback on the future of this project. You can submit a suggestion or feature request through the issue tracker. To make this process more effective, we're asking that these include more information to help define them more clearly.
+
+## License
+
+Licensed under the [MIT License](https://github.com/AiursoftWeb/docgenerator/blob/master/LICENSE).
